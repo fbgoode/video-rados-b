@@ -2,7 +2,7 @@
 const Mongoose = require('mongoose');
 const express = require('express');
 const app = express();
-const Settings = require("./settings");
+const Settings = require("../settings");
 const dbSettings = Settings[Settings.env].db;
 const routers = require('./routers');
 Mongoose.set('useFindAndModify', false); // To solve deprecation issue
@@ -18,7 +18,7 @@ app.use(express.json());
 
 // Add API routers
 for (let route in routers) {
-    app.use(`/1/${route}`,routers[route]);
+    app.use(`/${route}`,routers[route]);
 }
 
 // Connect to DB
