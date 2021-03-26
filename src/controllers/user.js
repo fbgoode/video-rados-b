@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const secret = process.env.JWT_SECRET;
 const jwtExpireIn = process.env.JWT_EXPIREIN;
 const Order = require('../models/order');
+const Film = require('../models/film');
 
 class UserController {
 
@@ -49,7 +50,16 @@ class UserController {
     }
 
     async getOrders(id) {
-        let user = await User.findById(id).populate('orders');
+        let user = await User.findById(id).populate('orders').populate({
+            path: 'orders',
+            populate: {
+                path:'items',
+                populate:{
+                    path:'film',
+                    model: Film
+                }
+            }
+        });
         return user.orders;
     }
 

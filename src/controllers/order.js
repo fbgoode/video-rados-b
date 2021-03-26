@@ -4,6 +4,7 @@ const Settings = require('../../settings');
 const tmdbSettings = Settings[Settings.env].tmdb;
 const User = require('../models/user');
 const Film = require('../models/film');
+const filmController = require('../controllers/film');
 
 class OrderController {
 
@@ -21,7 +22,14 @@ class OrderController {
         return await Order.find(obj)
         .limit(20)
         .skip(20 * (page-1))
-        .sort(sort);
+        .sort(sort)
+        .populate({
+            path:'items',
+            populate:{
+                path:'film',
+                model: Film
+            }
+        });
     }
 
     async getById(id) {
@@ -34,7 +42,22 @@ class OrderController {
         let total = 0;
         let toreduce = [];
         for (let item of order.items) {
-            const obj = await Film.findById(item.obj);
+            let obj;
+            if (typeof item.film == 'String' && item.film.length > 20) obj = await Film.findById(item.film);
+            else {
+                obj = await Film.findOne({tmdb_id:item.film});
+                console.log(obj)
+                if (!obj) {
+                    obj = await filmController.add({
+                        sku:"VR00000001",
+                        stocked:false,
+                        tmdb_id:item.film,
+                        pricePerDay:3,
+                        price:18
+                    });
+                }
+                item.film = obj._id;
+            };
             if (!obj) throw new Error('Product not found.');
             if (!item.sku) item.sku = obj.sku;
             if (!item.qty) item.qty = 1;
@@ -65,7 +88,6 @@ class OrderController {
     }
 
     async update(id, order) { // Warning: Does not adjust product stock, must be done manually
-        if (order.tmdb_id != undefined) order = await this.tmdbFetch(order);
         if (order.user == undefined) return Order.findByIdAndUpdate(id,order);
         let oldorder = await Order.findById(id);
         if (order.user == String(oldorder.user)) return Order.findByIdAndUpdate(id,order);

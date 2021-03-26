@@ -6,7 +6,7 @@ const orderSchema = new Mongoose.Schema({
         required: true
     },
     items: [{
-        obj: {
+        film: {
             type: Mongoose.Types.ObjectId,
             required: true
         },
