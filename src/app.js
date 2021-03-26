@@ -18,7 +18,7 @@ app.use(express.json());
 
 // Add API routers
 for (let route in routers) {
-    app.use(`/${route}`,routers[route]);
+    app.use(`/1/${route}`,routers[route]);
 }
 
 // Connect to DB

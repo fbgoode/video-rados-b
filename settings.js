@@ -22,14 +22,14 @@ module.exports = {
   },
   production: {
     tmdb: {
-      apiUrl: process.env.TMDB_APIURL || 'https://api.themoviedb.org/3/movie/',
+      apiUrl: process.env.TMDB_APIURL || 'https://api.themoviedb.org/3/',
       apiKey: process.env.TMDB_APIKEY || 'cac61624997edd865edf5c5c8caec2a2'
     },
     db: {
         pre: process.env.MONGO_PRE || 'mongodb+srv://',
-        host: process.env.MONGO_HOST || 'blockbuster-online.1kmjp.mongodb.net',
+        host: process.env.MONGO_HOST || 'cluster0.ef3ez.mongodb.net',
         port: process.env.MONGO_PORT || '',
-        dbname: process.env.MONGO_DBNAME || 'bbo',
+        dbname: process.env.MONGO_DBNAME || 'test',
         user: process.env.MONGO_USER || null,
         password: process.env.MONGO_PASSWORD || null,
         query: process.env.MONGO_QUERY || '?retryWrites=true&w=majority'
