@@ -6,7 +6,7 @@ router.get('/',async (req, res) => {
         let data = [];
         if (req.query.toprated) data = await movieController.getTopRated();
         else if (req.query.popular) data = await movieController.getMostPopular();
-        else if (req.query.genres) data = await movieController.discoverByGenre(req.query.genres,req.query.page);
+        else if (req.query.genre) data = await movieController.discoverByGenre(req.query.genre,req.query.page);
         else if (req.query.query) data = await movieController.search(req.query.query,req.query.page);
         res.json(data);
     } catch (error) {

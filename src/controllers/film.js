@@ -28,7 +28,7 @@ class FilmController {
     }
 
     async tmdbFetch(film) {
-        return axios.get(`${tmdbSettings.apiUrl}movie/${film.tmdb_id}?api_key=${tmdbSettings.apiKey}`)
+        return axios.get(`${tmdbSettings.apiUrl}movie/${film.tmdb_id}?language=es-ES&api_key=${tmdbSettings.apiKey}`)
         .then((res)=>{
             if (res.status>=200 && res.status<300) return res.data;
             else throw new Error(`The Request was unsuccessful. Code ${res.status}: ${res.statusText}`);
