@@ -22,7 +22,8 @@ class UserController {
             createdAt: new Date
         }
 
-        return jwt.sign(payload, secret, {expiresIn: jwtExpireIn});
+        if (jwtExpireIn) return jwt.sign(payload, secret, {expiresIn: jwtExpireIn});
+        return jwt.sign(payload, secret);
     }
 
     async search(query) {
