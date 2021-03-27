@@ -6,6 +6,7 @@ const Settings = require("../settings");
 const dbSettings = Settings[Settings.env].db;
 const routers = require('./routers');
 Mongoose.set('useFindAndModify', false); // To solve deprecation issue
+const cors = require('cors')
 
 // Exit on error if on development environment
 if (Settings.env == "development") process.on("unhandledRejection", err => {
@@ -13,7 +14,8 @@ if (Settings.env == "development") process.on("unhandledRejection", err => {
     process.exit(1);
   });
 
-// Add API JSON middleware
+// Add API CORS and JSON middleware
+app.use(cors());
 app.use(express.json());
 
 // Add API routers
