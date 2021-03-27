@@ -43,6 +43,7 @@ class FilmController {
             film.release_date = data.release_date;
             film.vote_average = data.vote_average;
             film.vote_count = data.vote_count;
+            film.runtime = data.runtime;
             return film;
         }).catch(err=>err);
     }
