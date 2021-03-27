@@ -107,8 +107,7 @@ class MovieController {
             poster_path_hd : `https://image.tmdb.org/t/p/w500${data.poster_path}`,
             release_date : data.release_date,
             vote_average : data.vote_average,
-            vote_count : data.vote_count,
-            runtime : data.runtime
+            vote_count : data.vote_count
         }
     }
 

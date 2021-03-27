@@ -30,8 +30,7 @@ const filmSchema = new Mongoose.Schema({
     poster_path_hd: String,
     release_date: String,
     vote_average: Number,
-    vote_count: Number,
-    duration: Number
+    vote_count: Number
 }, { timestamps: true });
 filmSchema.index( { title: "text", sku: "text" } );
 
