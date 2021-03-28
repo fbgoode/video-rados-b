@@ -24,6 +24,10 @@ class OrderController {
         .skip(20 * (page-1))
         .sort(sort)
         .populate({
+            path:'user',
+            model: User
+        })
+        .populate({
             path:'items',
             populate:{
                 path:'film',
