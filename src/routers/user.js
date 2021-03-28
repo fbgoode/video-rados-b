@@ -66,9 +66,7 @@ router.get('/:id',auth,async (req, res) => {
 
 router.post('/login',async (req, res) => {
     try{
-        const jwt = await userController.login(req.body.email,req.body.password);
-        const status = 'success';
-        res.json({status,jwt});
+        res.json(await userController.login(req.body.email,req.body.password));
     } catch (error) {
         return res.status(500).json({
             message: error.message
