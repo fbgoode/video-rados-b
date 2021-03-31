@@ -98,6 +98,7 @@ class MovieController {
 
     mapData(data) {
         return {
+            id: data.id,
             title : data.title,
             adult : data.adult,
             genres : data.genre_ids.map(a => mapGenre(a)),
