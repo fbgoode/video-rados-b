@@ -80,7 +80,7 @@ router.post('/',auth0,async (req, res) => {
         if (req.body.role !== undefined && req.body.role !== 'Customer' && req.jwt.role !== 'Admin') throw new Error('User role requires Admin authorization.');
         const user = await userController.add(req.body);
         const status = 'success';
-        res.json({status,new:user});
+        res.json(await userController.login(req.body.email,req.body.password));
     } catch (error) {
         return res.status(500).json({
             message: error.message
