@@ -78,9 +78,9 @@ router.post('/',auth0,async (req, res) => {
     try{
         // Non Admins or unauthorized users can only create users with Customer role.
         if (req.body.role !== undefined && req.body.role !== 'Customer' && req.jwt.role !== 'Admin') throw new Error('User role requires Admin authorization.');
+        let password = req.body.password;
         const user = await userController.add(req.body);
-        const status = 'success';
-        res.json(await userController.login(req.body.email,req.body.password));
+        res.json(await userController.login(req.body.email,password));
     } catch (error) {
         return res.status(500).json({
             message: error.message
