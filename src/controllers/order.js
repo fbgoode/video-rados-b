@@ -47,7 +47,7 @@ class OrderController {
         let toreduce = [];
         for (let item of order.items) {
             let obj;
-            if (typeof item.film == 'String' && item.film.length > 20) obj = await Film.findById(item.film);
+            if (typeof item.film === 'string' && item.film.length > 20) obj = await Film.findById(item.film);
             else {
                 obj = await Film.findOne({tmdb_id:item.film});
                 console.log(obj)
