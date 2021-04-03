@@ -55,8 +55,14 @@ class UserController {
     }
 
     async getOrders(id) {
-        let user = await User.findById(id).populate('orders').populate({
+        let user = await User.findById(id)
+        .populate({
             path: 'orders',
+            options: {
+                sort: {
+                    'createdAt' : -1
+                }
+            },
             populate: {
                 path:'items',
                 populate:{

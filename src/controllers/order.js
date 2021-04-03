@@ -56,7 +56,7 @@ class OrderController {
                         sku:"VR00000001",
                         stocked:false,
                         tmdb_id:item.film,
-                        pricePerDay:3,
+                        pricePerDay:2.99,
                         price:18
                     });
                 }
