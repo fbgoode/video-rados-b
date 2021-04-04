@@ -66,7 +66,7 @@ class OrderController {
             if (!item.sku) item.sku = obj.sku;
             if (!item.qty) item.qty = 1;
             else if (item.sku != obj.sku) throw new Error('Product id and sku do not match.');
-            if (item.rental && item.rentalDuration>0) item.price = obj.pricePerDay * item.rentalDuration; // Return date will be managed when delivery is confirmed
+            if (item.rental && item.rentalDuration>0) item.price = obj.pricePerDay * item.rentalDuration *(0.5+0.5**(item.rentalDuration)); // Return date will be managed when delivery is confirmed
             else {
                 item.price = obj.price;
                 item.rental = false;
